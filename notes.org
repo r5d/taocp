@@ -1,0 +1,8 @@
+* 1
+** 2
+*** 7
+**** ex 2
+#+BEGIN_SRC scheme
+(lambda (m) (+ 1 (/ m 2.0)))
+#+END_SRC
+
