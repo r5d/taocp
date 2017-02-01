@@ -13,12 +13,12 @@
   (/ (- 1 (sqrt 5.0)) 2.0))
 
 (define (fib-fast n)
-  "compute fibonacci of `n`."
+  "Compute Fibonacci of N."
   (/ (-  (expt phi n) (expt phi-dash n))
      (sqrt 5.0)))
 
 (define (fib-1-1000)
-  "return fibonacci numbers between 1 and 1000."
+  "Return Fibonacci numbers between 1 and 1000."
   (reverse (fold (lambda (n prev)
                    (cons (fib-fast n) prev))
                  '()
