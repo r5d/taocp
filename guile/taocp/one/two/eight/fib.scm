@@ -24,6 +24,14 @@
                  '()
                  (iota 1000 0))))
 
+(define (fib-fast-range start end)
+  "Return Fibonacci series between START and END."
+  (let ((count (1+ (- end start))))
+    (reverse (fold (lambda (n prev)
+                     (cons (fib-fast n) prev))
+                   '()
+                   (iota count start)))))
+
 
 ;; scheme@(taocp one two eight fib)> (fib-1-1000)
 ;; $39 = (0.0 1.0 1.0 2.0 3.0 5.0 8.0 13.0 21.0 34.0 54.99999999999999
