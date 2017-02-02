@@ -4,7 +4,7 @@
 (define-module (taocp one two eight fib)
   #:use-module (srfi srfi-1)
   #:export (fib-fast
-            fib-1-1000))
+            fib-0-1000))
 
 (define phi
   (/ (+ 1 (sqrt 5.0)) 2.0))
@@ -17,13 +17,6 @@
   (/ (-  (expt phi n) (expt phi-dash n))
      (sqrt 5.0)))
 
-(define (fib-1-1000)
-  "Return Fibonacci numbers between 1 and 1000."
-  (reverse (fold (lambda (n prev)
-                   (cons (fib-fast n) prev))
-                 '()
-                 (iota 1000 0))))
-
 (define (fib-fast-range start end)
   "Return Fibonacci series between START and END."
   (let ((count (1+ (- end start))))
@@ -32,9 +25,12 @@
                    '()
                    (iota count start)))))
 
+(define (fib-0-1000)
+  "Return Fibonacci series between 0 and 1000."
+  (fib-fast-range 0 1000))
 
-;; scheme@(taocp one two eight fib)> (fib-1-1000)
-;; $39 = (0.0 1.0 1.0 2.0 3.0 5.0 8.0 13.0 21.0 34.0 54.99999999999999
+;; scheme@(guile-user)> (fib-0-1000)
+;; $5 = (0.0 1.0 1.0 2.0 3.0 5.0 8.0 13.0 21.0 34.0 54.99999999999999
 ;; 89.0 143.99999999999997 232.99999999999994 377.00000000000006 610.0
 ;; 986.9999999999998 1596.9999999999998 2584.0 4181.0
 ;; 6764.999999999999 10945.999999999998 17710.999999999996
@@ -366,4 +362,4 @@
 ;; 3.534100091787516e206 5.718294068156324e206 9.252394159943839e206
 ;; 1.4970688228100163e207 2.4223082388044002e207
 ;; 3.9193770616144174e207 6.341685300418816e207 1.0261062362033233e208
-;; 1.660274766245205e208 2.6863810024485288e208)
+;; 1.660274766245205e208 2.6863810024485288e208 4.346655768693734e208)
