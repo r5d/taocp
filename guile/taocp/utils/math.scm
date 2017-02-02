@@ -29,7 +29,11 @@ function defined in (taocp one two eight fib).
         (else (+ (fib (- n 1)) (fib (- n 2))))))
 
 (define (fib-range start end)
-  "Returns Fibonacci sequence between START and END."
+  "Returns Fibonacci sequence between START and END.
+
+This function is useless wher START/END is large. Use `fib-fast-range`
+function defined in (taocp one two eight fib).
+"
   (let ((f (lambda (x) (cons x (fib x))))
         (count (1+ (- end start ))))
   (map f (iota count start))))
