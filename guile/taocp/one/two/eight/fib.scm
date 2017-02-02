@@ -13,7 +13,7 @@
   (/ (- 1 (sqrt 5.0)) 2.0))
 
 (define (fib-fast n)
-  "Compute Fibonacci of N."
+  "Returns Fibonacci of N."
   (/ (-  (expt phi n) (expt phi-dash n))
      (sqrt 5.0)))
 
