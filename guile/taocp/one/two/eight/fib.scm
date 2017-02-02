@@ -4,6 +4,7 @@
 (define-module (taocp one two eight fib)
   #:use-module (srfi srfi-1)
   #:export (fib-fast
+            fib-fast-range
             fib-0-1000))
 
 (define phi
