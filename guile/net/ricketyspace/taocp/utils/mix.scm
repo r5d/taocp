@@ -9,7 +9,10 @@
 
 ;;;; Functions that facilitate hacking in MIX
 
-;;; All functions in this module assume that a byte is 6 bits.
+;;; All functions in this module make the following assumptions:
+;;; - A byte is 6 bits
+;;; - A word is 6 bytes.
+;;; - First byte is the sign byte (±)
 
 (define (word-to-decimal word)
   "Converts WORD to a decimal number.
