@@ -1,7 +1,7 @@
 ;;;; copyright 2016 rsiddharth <s@ricketyspace.net>
 ;;;; under gnu general public license version 3 or higher.
 
-(define-module (taocp one two seven hn)
+(define-module (net ricketyspace taocp one two seven hn)
   #:export (compute-hn
             compute-h2^m
             h2^m-relation))

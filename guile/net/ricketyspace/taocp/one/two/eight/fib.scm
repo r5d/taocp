@@ -1,7 +1,7 @@
 ;;;; copyright 2016 rsiddharth <s@ricketyspace.net>
 ;;;; under gnu general public license version 3 or higher.
 
-(define-module (taocp one two eight fib)
+(define-module (net ricketyspace taocp one two eight fib)
   #:use-module (srfi srfi-1)
   #:export (fib-fast
             fib-fast-range

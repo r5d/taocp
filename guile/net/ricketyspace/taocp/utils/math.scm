@@ -1,7 +1,7 @@
 ;;;; copyright 2016 rsiddharth <s@ricketyspace.net>
 ;;;; under gnu general public license version 3 or higher.
 
-(define-module (taocp utils math)
+(define-module (net ricketyspace taocp utils math)
   #:use-module (srfi srfi-1)
   #:export (compute-exp1-n
             fib
