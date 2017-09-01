@@ -1,13 +1,9 @@
 TERM      ORIG 3000
 START     DEC4 1
-          LDA 3008
+          LDA 3004
           STA 0,4
-          ENTA 0,4
-          SLA 3
-          ADD 3008(5:5)
-          LDX 3008
-          STA 3008
-          JMP 3009
+          ST4 3004(1:2)
+          JMP 3005,1
           STZ 0,4
-          STX 3008
+          STA 3004
           END START
