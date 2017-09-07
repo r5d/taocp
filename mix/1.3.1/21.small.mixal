@@ -1,0 +1,9 @@
+TERM      ORIG 1000
+START     LDA 2000
+          ENT1 12
+          MUL 2000
+          DEC1 1
+          SRC 5
+          J1NZ 1002
+          HLT 0
+          END START
