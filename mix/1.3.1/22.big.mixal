@@ -12,3 +12,7 @@ START     ENT1 5
           SRC 5
           HLT 0
           END START
+* space = 12; time = 102u.
+* time is 72u less than the time for 22.small.mixal.
+* this solution uses successive squaring.
+* discovered successive squaring in sicp. second edition. section 1.2.4.
