@@ -7,3 +7,4 @@ START     LDA 2000
           J1NZ 1002
           HLT 0
           END START
+* space 7; time 181u.
