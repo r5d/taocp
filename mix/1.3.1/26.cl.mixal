@@ -1,0 +1,49 @@
+TERM    ORIG    0 Card Loading Routine. Rough ugly first version.
+START   IN  80(16) Read from card reader.
+TCHCK   LDA 80 First check if it's a transfer card.
+        SUB TRNS
+        JANZ LC Transfer card if A is zero.
+        LDX 81(2:5) If here, it's a transfer card.
+        NUM 0
+        STA 81(2:5)
+        LD1 81(4:5)
+        JMP 0,1 # Jump to address specified in transfer card.
+LC      LDX 81(0:1) If here, it's an information card.
+        LDA ZERO Reset A
+        NUM 0
+        STA 81(0:1) Store no. of instructions.
+        LDA ZERO Reset A
+        LDX 81(2:5) Load dest. address of first instruction in character form.
+        NUM 0 Convert it to numeric form.
+        STA 81(2:5) Store dest. address of first instruction in numeric form.
+J       LD2 81(4:5) Load dest. address of current instruction to I2.
+        LD3 SADD(4:5) Load address of current instruction in charater form.
+        LDA 0,3 Load first part of current instruction in character form.
+        LDX 1,3 Load second part of current instruction in character form.
+        NUM 0
+        STA 0,2 Store current instruction in numeric form to dest. address.
+        LDA ZERO Reset A
+        ADD SADD Load address of current instruction in character form.
+        ADD TWO Increment it by 2.
+        STA SADD Store address of next instruction in charactor form.
+        LDA 81(4:5) Load dest. address of current instruction.
+        ADD ONE Increment by 1.
+        STA 81(4:5) Store dest. address of next instruction.
+        LDA 81(0:1) Load value 'no. of instructions'.
+        SUB ONE Decrement by 1.
+        STA 81(0:1) Store value 'no. of instructions' to go.
+        JANZ J If 'no. of instructions' not zero jump to J.
+        LDA ET
+        STA SADD Reset SADD to 82.
+        LDA ZERO
+        LDX ZERO
+        JMP START Read another card.
+STOP    HLT
+SADD    CON 82
+ET      CON 82
+ZERO    CON 0
+ONE     CON 1
+TWO     CON 2
+TRNS    ALF TRANS
+        END     START
+
