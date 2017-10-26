@@ -1,18 +1,21 @@
 BUFF    EQU 80
-TERM    ORIG    0 Card Loading Routine. Rough ugly second version.
+TERM    ORIG    0 Card Loading Routine. Rough ugly third version.
 START   IN  BUFF(16) Read from card reader.
         LDX BUFF+1(2:5)
 N30     NUM 30
-        STA BUFF
+N24     STA BUFF
 TCHCK   LDA BUFF+1(0:1) Transfer card check.
         SUB N30(0:2)
 J       LD2 BUFF Load dest. address of current instruction to I2.
         JAZ 0,2 Jump if transfer card.
         STA BUFF+1(0:1) Store no. of instructions.
+        LDA BUFF+3,1(5:5)
+        SUB N24(5:5)
+        STA 0,2(0:0) Store sign.
         LDA BUFF+2,1 Load first part of current instruction in character form.
         LDX BUFF+3,1 Load second part of current instruction in character form.
 N01     NUM 1
-        STA 0,2 Store current instruction in numeric form to dest. address.
+        STA 0,2(1:5) Store current instruction in numeric form to dest. address.
         MOVE 0,1(2) I1 <- I1 + 2
         LDA BUFF Load dest. address of current instruction.
         ADD N01(0:2) Increment by 1.
