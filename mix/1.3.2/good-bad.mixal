@@ -1,0 +1,24 @@
+INST    EQU     1000
+GOOD    EQU     1001
+BAD     EQU     1002
+TABLE   EQU     200
+        ORIG    0
+START   LD1     INST(5:5)       Load C field into I1.
+        LD1     TABLE,1
+        JMP     0,1
+        HLT
+* Start switching table.
+        ORIG    300
+* A, I, F field validation groups.
+G01     LD1     INST(4:4)
+        CMP1    =45=
+        JG      BAD
+        JMP     GOOD
+        ORIG    200
+* EXX -> Entry for instruction with C = XX.
+E00     CON     GOOD
+E01     CON     G01
+E02     CON     G01
+E03     CON     G01
+E04     CON     G01
+        END     START
