@@ -4,14 +4,45 @@ BAD     EQU     1002
 TABLE   EQU     200
         ORIG    0
 START   LD1     INST(5:5)       Load C field into I1.
+        LD2     INST(4:4)        Load F field into I2.
         LD1     TABLE,1
         JMP     0,1
         HLT
 * Start switching table.
         ORIG    300
 * A, I, F field validation groups.
-G01     LD1     INST(4:4)
-        CMP1    =45=
+G01     CMP2    =45=
+        JG      BAD
+        JMP     GOOD
+G02     CMP2    =2=
+        JG      BAD
+        JMP     GOOD
+G03     CMP2    =5=
+        JG      BAD
+        JMP     GOOD
+G04     JMP     GOOD
+G05     CMP2    =45=
+        JG      BAD
+        JMP     GOOD
+G06     CMP2    =20=
+        JG      BAD
+        JMP     GOOD
+G07     CMP2    =20=
+        JG      BAD
+        JMP     GOOD
+G08     CMP2    =20=
+        JG      BAD
+        JMP     GOOD
+G09     CMP2    =9=
+        JG      BAD
+        JMP     GOOD
+G10     CMP2    =5=
+        JG      BAD
+        JMP     GOOD
+G11     CMP2    =3=
+        JG      BAD
+        JMP     GOOD
+G12     CMP2    =45=
         JG      BAD
         JMP     GOOD
         ORIG    200
@@ -21,4 +52,63 @@ E01     CON     G01
 E02     CON     G01
 E03     CON     G01
 E04     CON     G01
+E05     CON     G02
+E06     CON     G03
+E07     CON     G04
+E08     CON     G05
+E09     CON     G05
+E10     CON     G05
+E11     CON     G05
+E12     CON     G05
+E13     CON     G05
+E14     CON     G05
+E15     CON     G05
+E16     CON     G05
+E17     CON     G05
+E18     CON     G05
+E19     CON     G05
+E20     CON     G05
+E21     CON     G05
+E22     CON     G05
+E23     CON     G05
+E24     CON     G05
+E25     CON     G05
+E26     CON     G05
+E27     CON     G05
+E28     CON     G05
+E29     CON     G05
+E30     CON     G05
+E31     CON     G05
+E32     CON     G05
+E33     CON     G05
+E34     CON     G06
+E35     CON     G07
+E36     CON     G08
+E37     CON     G08
+E38     CON     G08
+E39     CON     G09
+E40     CON     G10
+E41     CON     G10
+E42     CON     G10
+E43     CON     G10
+E44     CON     G10
+E45     CON     G10
+E46     CON     G10
+E47     CON     G10
+E48     CON     G11
+E49     CON     G11
+E50     CON     G11
+E51     CON     G11
+E52     CON     G11
+E53     CON     G11
+E54     CON     G11
+E55     CON     G11
+E56     CON     G12
+E57     CON     G12
+E58     CON     G12
+E59     CON     G12
+E60     CON     G12
+E61     CON     G12
+E62     CON     G12
+E63     CON     G12
         END     START
