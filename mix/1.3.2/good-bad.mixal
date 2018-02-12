@@ -1,50 +1,78 @@
+* This program is the ugliest thing ever created by mankind. It's
+* probably not correct. Email me at s@ricketyspace.net if you would
+* like to look at Knuth's version of this program.
+
 INST    EQU     1000
 GOOD    EQU     1001
 BAD     EQU     1002
 TABLE   EQU     200
         ORIG    0
-START   LD1     INST(5:5)       Load C field into I1.
-        LD2     INST(4:4)        Load F field into I2.
+START   LD1     INST(5:5)
+        CMP1     =63=
+        JG      BAD
+        LD1     INST(5:5) Load C field into I1.
         LD1     TABLE,1
         JMP     0,1
-        HLT
 * Start switching table.
         ORIG    300
 * A, I, F field validation groups.
-G01     CMP2    =45=
+G01     JMP     VFIELD
+G02     LDA     INST(4:4)
+        CMPA    =2=
         JG      BAD
         JMP     GOOD
-G02     CMP2    =2=
+G03     LDA     INST(4:4)
+        CMPA    =5=
+        JG      BAD
+        LDA     INST(0:2) # Load M
+        JAN     BAD
+        JMP     GOOD
+G04     JMP     VMEM
+G05     JMP     VFIELD
+G06     LDA     INST(4:4)
+        CMPA    =20=
+        JG      BAD
+        JMP     VMEM
+G07     LDA     INST(4:4)
+        CMPA    =20=
         JG      BAD
         JMP     GOOD
-G03     CMP2    =5=
+G08     LDA     INST(4:4)
+        CMPA    =20=
+        JG      BAD
+        JMP     VMEM
+G09     LDA     INST(4:4)
+        CMPA    =9=
+        JG      BAD
+        JMP     VMEM
+G10     LDA     INST(4:4)
+        CMPA    =5=
+        JG      BAD
+        JMP     VMEM
+G11     CMPA    =3=
         JG      BAD
         JMP     GOOD
-G04     JMP     GOOD
-G05     CMP2    =45=
+        JMP     VMEM
+G12     JMP     VFIELD
+VFIELD  ADD     INST(4:4) Load INST's F field to A.
+        CMPA    =45=
+        JG      BAD
+        SRC     5
+        DIV     =8=
+        STX     TMP Store remainder in memory.
+        CMPA    TMP Compare quotient and remainder.
+        JG      BAD
+VMEM    LD1     INST(3:3) Load I field of instruction.
+        CMP1    =6=
+        JG      BAD
+        CMP1    =0=
+        JG      GOOD
+        LD1     INST(0:2) Load AA field of instruction.
+        J1N     BAD
+        CMP1   =3999=
         JG      BAD
         JMP     GOOD
-G06     CMP2    =20=
-        JG      BAD
-        JMP     GOOD
-G07     CMP2    =20=
-        JG      BAD
-        JMP     GOOD
-G08     CMP2    =20=
-        JG      BAD
-        JMP     GOOD
-G09     CMP2    =9=
-        JG      BAD
-        JMP     GOOD
-G10     CMP2    =5=
-        JG      BAD
-        JMP     GOOD
-G11     CMP2    =3=
-        JG      BAD
-        JMP     GOOD
-G12     CMP2    =45=
-        JG      BAD
-        JMP     GOOD
+        HLT
         ORIG    200
 * EXX -> Entry for instruction with C = XX.
 E00     CON     GOOD
@@ -111,4 +139,10 @@ E60     CON     G12
 E61     CON     G12
 E62     CON     G12
 E63     CON     G12
+        ORIG    1000
+        LDA     4000,1(4:3)
+        LD2     =42=
+        LD3     =69=
+TMP     NOP     00 Used to store temporary values.
+        HLT
         END     START
