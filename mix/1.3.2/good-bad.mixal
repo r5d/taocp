@@ -49,10 +49,10 @@ G10     LDA     INST(4:4)
         CMPA    =5=
         JG      BAD
         JMP     VMEM
-G11     CMPA    =3=
+G11     LDA     INST(4:4)
+        CMPA    =3=
         JG      BAD
         JMP     GOOD
-        JMP     VMEM
 G12     JMP     VFIELD
 VFIELD  ADD     INST(4:4) Load INST's F field to A.
         CMPA    =45=
