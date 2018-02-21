@@ -1,0 +1,29 @@
+* This program is work in progress.
+        ORIG 2000
+START   NOP
+RC      ENT5 4095
+        LD4 CUR(4:4) load i into I4
+        LD4 3000,4
+        ENT3 1 j counter
+2H      CMP5 0,4
+        JLE  4F
+        LD5  0,4 load new min in row
+4H      INC4 1
+        INC3 1 incr counter
+        CMP3 =8=
+        JLE  2B
+PCOL    NOP
+        HLT
+        ORIG 3000
+RS      CON  0
+        CON  1009
+        CON  1017
+        CON  1025
+        CON  1033
+        CON  1041
+        CON  1049
+        CON  1057
+        CON  1065
+        CON  1073
+CUR     CON  65 00 00 00 01 01 -> a(0, 0, i, j)
+        END START
