@@ -27,6 +27,5 @@ PCOL    ENT2 1008,2 position of first row in min col
         INC3 1
         CMP3 =9=
         JLE  6B
-        JMP   RC
 STOP    HLT
         END START
