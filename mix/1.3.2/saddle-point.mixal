@@ -1,6 +1,5 @@
         ORIG 2000
 START   ENTA 0 Register A tracks current row i
-        ENT2 -1
         ENT4 1008 Will contain address of element being compared against the current row min.
 RC      ENT5 4095 Contains the current row min.
         INCA 1
@@ -13,16 +12,16 @@ RC      ENT5 4095 Contains the current row min.
 2H      CMP5 0,4
         JL   4F
         JE   3F
-        LD5  0,4 load new min in row
-3H      ENT1 0,4 store address of min in I1
+        LD5  0,4 Load new min in row
+        ENT2 -1 Reset I2
+3H      ENT1 0,4 Store address of min in I1
         INC2 1
-        ST3  1000,2 store col position (j)
+        ST4  1000,2 Store address also in aux. list.
 4H      INC4 1
-        INC3 1 incr counter
+        INC3 1 Incr counter
         CMP3 =8=
         JLE  2B
-PCOL    LD6 1000,2 position of first row in min col
-        INC6 1008
+PCOL    LD6 1000,2 Position of first row in min col
         ENT3 1 i counter
 6H      CMP5 0,6
         JL   8F
@@ -32,9 +31,8 @@ PCOL    LD6 1000,2 position of first row in min col
         JLE  6B
         JMP  STOP
 8H      DEC2 1
-        J1N  RC
-        ENT1 -9,4 store address of new min in I1.
-        ENT1 0,2
+        J2N  RC
+        LD1 1000,2 Load address of new min in I1.
         JMP PCOL
 STOP    HLT
         END START
