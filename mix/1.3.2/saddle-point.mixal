@@ -16,12 +16,13 @@ RC      ENT5 4095 Contains the current row min.
         ENT2 -1 Reset I2
 3H      ENT1 0,4 Store address of min in I1
         INC2 1
-        ST4  1000,2 Store address also in aux. list.
+        ST3  1000,2 Store j in aux. list.
 4H      INC4 1
-        INC3 1 Incr counter
+        INC3 1 Incr j counter
         CMP3 =8=
         JLE  2B
-PCOL    LD6 1000,2 Position of first row in min col
+PCOL    LD6  1000,2 Position of first row in min col
+        INC6 1008
         ENT3 1 i counter
 6H      CMP5 0,6
         JL   8F
@@ -32,7 +33,8 @@ PCOL    LD6 1000,2 Position of first row in min col
         JMP  STOP
 8H      DEC2 1
         J2N  RC
-        LD1 1000,2 Load address of new min in I1.
+FUCK    LD1 1000,2 Load address of new min in I1.
+        INC1 -9,4
         JMP PCOL
 STOP    HLT
         END START
