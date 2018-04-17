@@ -1,14 +1,13 @@
         ORIG 2000
 START   ENTA 0 Register A tracks current row i
-        ENT4 1008 Will contain address of element being compared against the current row min.
+        ENT4 1009 Will contain address of element being compared against the current row min.
 RC      ENT5 4095 Contains the current row min.
+        ENT3 1 j counter
         INCA 1
         CMPA =9=
         JLE  2F
         ENT1 0
         JMP  STOP
-2H      INC4 1
-        ENT3 1 j counter
 2H      CMP5 0,4
         JL   4F
         JE   3F
