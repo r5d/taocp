@@ -5,6 +5,7 @@ G       CON  0 G will get stored here.
 C       CON  0 C will get stored here.
 X       CON  0 X will get stored here.
 Z       CON  0 Z will get stored here.
+D       CON  0 D will get stored here.
         ORIG 1000
 START   JMP DOE
 * Date of Easter routine. Assumes Y is in address 0.
@@ -30,5 +31,11 @@ DOE     LDX  Y Step E1
         DIV  =25=
         DECA 5
         STA  Z
+        ENTA 5 Compute D
+        MUL  Y
+        DIV  =4=
+        SUB  X
+        DECA 10
+        STA  D
 STOP    HLT
         END START
