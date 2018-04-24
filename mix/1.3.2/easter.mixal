@@ -1,4 +1,4 @@
-* Work in progress...
+* 1.3.2 Ex. 14. Work in progress...
         ORIG 0
 Y       CON  0 Y is stored here.
 G       CON  0 G will get stored here.
@@ -6,36 +6,53 @@ C       CON  0 C will get stored here.
 X       CON  0 X will get stored here.
 Z       CON  0 Z will get stored here.
 D       CON  0 D will get stored here.
+E       CON  0 E will get stored here.
         ORIG 1000
 START   JMP DOE
 * Date of Easter routine. Assumes Y is in address 0.
-DOE     LDX  Y Step E1
+DOE     LDX  Y Compute G.
         ENTA 0
         DIV  =19=
         INCX 1
         STX  G
-        ENTA 0 Step E2
+        ENTA 0 Compute C.
         LDX  Y
         DIV  =100=
         INCA 1
         STA  C
-        ENTA 0 Step E3
-        ENTA 3 Compute X
+        ENTA 3 Compute X.
         MUL  C
         DIV  =4=
         DECA 12
         STA  X
-        ENTA 8 Compute Z
+        ENTA 8 Compute Z.
         MUL  C
         INCX 5
         DIV  =25=
         DECA 5
         STA  Z
-        ENTA 5 Compute D
+        ENTA 5 Compute D.
         MUL  Y
         DIV  =4=
         SUB  X
         DECA 10
         STA  D
+        ENTA 11 Compute E.
+        MUL  G
+        INCX 20
+        SLC  5 Move value to reg. A from reg. X.
+        ADD  Z
+        SUB  X
+        SRC  5 Move value to reg. X from reg. A.
+        DIV  =30=
+        CMPX =24= Compare E with 24.
+        JE   INCRE
+        CMPX =25= Compare E with 25.
+        JNE  STRE
+        LD1  G
+        CMP1 =11=
+        JLE  STRE
+INCRE   INCX 1 Increment E by 1.
+STRE    STX  E
 STOP    HLT
         END START
