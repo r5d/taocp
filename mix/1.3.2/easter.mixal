@@ -7,6 +7,7 @@ X       CON  0 X will get stored here.
 Z       CON  0 Z will get stored here.
 D       CON  0 D will get stored here.
 E       CON  0 E will get stored here.
+N       CON  0 N will get stored here.
         ORIG 1000
 START   JMP DOE
 * Date of Easter routine. Assumes Y is in address 0.
@@ -54,5 +55,11 @@ DOE     LDX  Y Compute G.
         JLE  STRE
 INCRE   INCX 1 Increment E by 1.
 STRE    STX  E
+        ENTA 44 Compute N.
+        SUB  E
+        CMPA =21=
+        JGE  STRN
+        INCA 30
+STRN    STA  N
 STOP    HLT
         END START
