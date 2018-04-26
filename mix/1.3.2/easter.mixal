@@ -61,5 +61,13 @@ STRE    STX  E
         JGE  STRN
         INCA 30
 STRN    STA  N
+        LDA  D Penultimate step.
+        ADD  N
+        SRC  5 Move value to reg. X from reg. A.
+        ENTA 0 Clear reg. A
+        DIV  =-7=
+        SLC  5 Move value to reg. X from reg. X
+        ADD  =7=
+        ADD  N
 STOP    HLT
         END START
