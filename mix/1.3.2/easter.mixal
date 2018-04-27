@@ -69,5 +69,11 @@ STRN    STA  N
         SLC  5 Move value to reg. X from reg. X
         ADD  =7=
         ADD  N
+        ENTX 0 Clear reg. X.
+        CMPA =31=
+        JLE  DONE
+        SUB  =31=
+        ENTX 1 Means month is April.
+DONE    NOP
 STOP    HLT
         END START
