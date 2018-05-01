@@ -8,6 +8,11 @@ Z       CON  0 Z will get stored here.
 D       CON  0 D will get stored here.
 E       CON  0 E will get stored here.
 N       CON  0 N will get stored here.
+        ORIG 2000
+POUT    ALF  "  23 "
+        ALF  "MARCH"
+        ALF  ",  20"
+        ALF  "28   "
         ORIG 1000
 START   JMP DOE
 * Date of Easter routine. Assumes Y is in address 0.
@@ -71,9 +76,24 @@ STRN    STA  N
         ADD  N
         ENTX 0 Clear reg. X.
         CMPA =31=
-        JLE  DONE
+        JLE  DAY
         SUB  =31=
-        ENTX 1 Means month is April.
-DONE    NOP
+        ENT1 1 Means month is April.
+DAY     CHAR
+        SRC  5 Build and store DD
+        SLA  3
+        SRA  3
+        STA  POUT(3:4)
+YEAR    LDA  Y
+        CHAR
+        SLC  3
+        SLA  2 Build and store higher YYY
+        SRA  2
+        STA  POUT+2(3:5)
+        SLC  2 Build and store lower YY
+        SLA  3
+        SRA  3
+        STA  POUT+3(1:2)
+        OUT  2000(18)
 STOP    HLT
         END START
