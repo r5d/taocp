@@ -8,7 +8,8 @@ Z       CON  0 Z will get stored here.
 D       CON  0 D will get stored here.
 E       CON  0 E will get stored here.
 N       CON  0 N will get stored here.
-        ORIG 2000
+MNTH    ALF  "MARCH"
+        ALF  "APRIL"
 POUT    ALF  "  23 "
         ALF  "MARCH"
         ALF  ",  20"
@@ -16,7 +17,8 @@ POUT    ALF  "  23 "
         ORIG 1000
 START   JMP DOE
 * Date of Easter routine. Assumes Y is in address 0.
-DOE     LDX  Y Compute G.
+DOE     ENT1 0 Clear I1 reg.
+        LDX  Y Compute G.
         ENTA 0
         DIV  =19=
         INCX 1
@@ -94,6 +96,8 @@ YEAR    LDA  Y
         SLA  3
         SRA  3
         STA  POUT+3(1:2)
-        OUT  2000(18)
+MONTH   LDA  MNTH,1
+        STA  POUT+1
+        OUT  POUT(18) Write to line printer
 STOP    HLT
         END START
