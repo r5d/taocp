@@ -16,8 +16,12 @@ POUT    ALF  "  23 "
         ALF  "28   "
         ORIG 1000
 START   JMP DOE
+STOP    HLT
 * Date of Easter routine. Assumes Y is in address 0.
-DOE     ENT1 0 Clear I1 reg.
+* Routine using registers A, X and I1.
+DOE     STJ  J2
+        ENT1 0 Clear reg. I1.
+        ENTA 0 Clear reg. A.
         LDX  Y Compute G.
         ENTA 0
         DIV  =19=
@@ -99,5 +103,5 @@ YEAR    LDA  Y
 MONTH   LDA  MNTH,1
         STA  POUT+1
         OUT  POUT(18) Write to line printer
-STOP    HLT
+J2      JMP  *
         END START
