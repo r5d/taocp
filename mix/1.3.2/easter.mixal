@@ -15,7 +15,13 @@ POUT    ALF  "  23 "
         ALF  ",  20"
         ALF  "28   "
         ORIG 1000
-START   JMP DOE
+START   ENT2 1950
+LOOP    CMP2 =2000=
+        JG   STOP
+        ST2  0
+        JMP  DOE
+        INC2 1
+        JMP  LOOP
 STOP    HLT
 * Date of Easter routine. Assumes Y is in address 0.
 * Routine using registers A, X and I1.
