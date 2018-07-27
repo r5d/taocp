@@ -1,0 +1,56 @@
+* Work in progress.
+TERM    ORIG  0
+START   LDX  IX
+        STX  TMPX If ovrf set, X(1:1) <- 1
+        JNOV ODI
+        ENTA 1
+        STA  TMPX(1:1)
+        LDX  TMPX
+ODI     STX  TMPX Outter Del If
+        LDA  TMPX(1:1)
+        JANP OBI
+        LDA  TMPX(2:2)
+        CMPA =1=
+        JE   DP
+        CMPA =2=
+        JNE  OBI
+DP      CMP2 =18= if ELAP >= 18 and ELAP <= 26
+        JL   3F
+        CMP2 =26=
+        JG   3F
+SIF     STX  TMPX Toggle X(4:4) 0 <-> 2
+        ENTA 0
+        CMPX TR0(4:4)
+        JG   2F
+        ENTA 2
+2H      STA  TMPX(4:4)
+3H      CMP2 =26= if ELAP > 26
+        JLE  DT
+        ENTA 2
+        STA  TMPX(4:4)
+DT      CMP2 =30=
+        JLE  4H
+        CMP2 =38=
+        JG   4H
+        ENTA 2
+        STA  TMPX(2:2)
+4H      CMP2 =38=
+        JLE  5H
+        ENTA 3
+        STA  TMPX(2:2)
+        ENTA 1
+        STA  TMPX(3:3)
+        STA  TMPX(5:5)
+        ENT2 0 Reset timer
+        ENTA 0
+        STA  TMPX(1:1) Reset overflow
+5H      LDX  TMPX
+OBI     NOP  0 Outter Ber If
+        HLT
+IX      CON 17313794 + 01 02 03 00 02 17051650
+TMPX    CON 0
+TR0     CON 0
+TR1     CON 266305 + 00 01 01 01 01
+TR2     CON 532610 + 00 02 02 02 02
+T3      CON 798720 + 00 03 03 00 00
+        END START
